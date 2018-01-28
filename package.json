@@ -1,0 +1,56 @@
+{
+  "name": "react-tone",
+  "version": "1.0.0",
+  "description": "A React Component that plays a tone",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "nps"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newyork-anthonyng/react-tone.git"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "tone",
+    "oscillator",
+    "audioContext"
+  ],
+  "author": "Anthony Ng <newyork.anthonyng@gmail.com> (http://anthonyng.me)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/newyork-anthonyng/react-tone/issues"
+  },
+  "homepage": "https://github.com/newyork-anthonyng/react-tone#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "codecov": "^3.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.16.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-prettier": "^2.5.0",
+    "eslint-plugin-react": "^7.6.0",
+    "jest": "^22.1.4",
+    "nps": "^5.7.1",
+    "nps-utils": "^1.5.0",
+    "prettier": "^1.10.2",
+    "react-dom": "^16.2.0",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0"
+  }
+}

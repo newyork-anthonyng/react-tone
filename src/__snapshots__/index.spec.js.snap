@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should play sound when changing from props.play=false to props.play=true 1`] = `
+Array [
+  123456.42,
+]
+`;
+
+exports[`should play sound when mounting when props.play=true 1`] = `
+Array [
+  123456.42,
+]
+`;

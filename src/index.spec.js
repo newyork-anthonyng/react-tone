@@ -34,7 +34,7 @@ beforeEach(() => {
     play: false,
     frequency: 42,
     audioContext: new mockAudioContext(),
-    onStop: () => {}
+    onStop: undefined
   };
 });
 

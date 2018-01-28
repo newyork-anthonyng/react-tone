@@ -17,8 +17,12 @@ module.exports = {
     },
 
     validate: {
-      description: "Script run in Travis",
-      script: npsUtils.concurrent.nps("test.cover", "lint", "build"),
+      default: {
+        description: "Run on Travis",
+        script: npsUtils.concurrent.nps("test.cover", "lint", "build")
+      },
+
+      prepush: npsUtils.concurrent.nps("test.cover", "lint")
     },
 
     afterSuccess: "codecov"

@@ -7,7 +7,8 @@
     "dist"
   ],
   "scripts": {
-    "start": "nps"
+    "start": "nps",
+    "prepush": "npm start validate.prepush"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,7 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-prettier": "^2.5.0",
     "eslint-plugin-react": "^7.6.0",
+    "husky": "^0.14.3",
     "jest": "^22.1.4",
     "nps": "^5.7.1",
     "nps-utils": "^1.5.0",

@@ -2,6 +2,11 @@ const npsUtils = require("nps-utils");
 
 module.exports = {
   scripts: {
+    commit: {
+      script: "git cz",
+      description: "Use commitizen for commit messages"
+    },
+
     build: "webpack",
 
     lint: "eslint src/",

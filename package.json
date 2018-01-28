@@ -1,6 +1,6 @@
 {
   "name": "react-tone",
-  "version": "1.0.1",
+  "version": "0.0.0-development",
   "description": "A React Component that plays a tone",
   "main": "dist/index.js",
   "files": [
@@ -8,11 +8,13 @@
   ],
   "scripts": {
     "start": "nps",
-    "prepush": "npm start validate.prepush"
+    "prepush": "npm start validate.prepush",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/newyork-anthonyng/react-tone.git"
+    "url": "https://github.com/newyork-anthonyng/react-tone.git"
   },
   "keywords": [
     "react",
@@ -35,6 +37,8 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "codecov": "^3.0.0",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.16.0",
@@ -46,13 +50,20 @@
     "nps": "^5.7.1",
     "nps-utils": "^1.5.0",
     "prettier": "^1.10.2",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.2.0",
-    "prop-types": "^15.6.0",
+    "semantic-release": "^12.4.1",
+    "travis-deploy-once": "^4.3.3",
     "webpack": "^3.10.0"
   },
   "peerDependencies": {
     "react": "^16.0.0",
     "prop-types": "^15.6.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

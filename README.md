@@ -80,15 +80,18 @@ class App extends Component {
         <Tone
           audioContext={this.audioContext}
           play={this.state.isTonePlaying}
-          length={500}
+          frequency={500}
           length={2}
-          onClick={this.handleToneStop}
+          onStop={this.handleToneStop}
         />
       </div>
     );
   }
 }
 ```
+
+# Demo
+See this [CodeSandbox demo](https://codesandbox.io/s/p736lln107).
 
 [codecov]: https://codecov.io/gh/newyork-anthonyng/react-tone
 [codecov-badge]: https://img.shields.io/codecov/c/github/newyork-anthonyng/react-tone/master.svg

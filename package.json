@@ -46,13 +46,13 @@
     "nps": "^5.7.1",
     "nps-utils": "^1.5.0",
     "prettier": "^1.10.2",
+    "react": "^16.0.0",
     "react-dom": "^16.2.0",
+    "prop-types": "^15.6.0",
     "webpack": "^3.10.0"
   },
-  "dependencies": {
-    "prop-types": "^15.6.0"
-  },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.0.0",
+    "prop-types": "^15.6.0"
   }
 }

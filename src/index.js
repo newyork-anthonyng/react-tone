@@ -8,9 +8,7 @@ class Tone extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (!prevProps.play && this.props.play) {
-      this.playSound();
-    }
+    if (!prevProps.play && this.props.play) this.playSound();
   }
 
   playSound = () => {

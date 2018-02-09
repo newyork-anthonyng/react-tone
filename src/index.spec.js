@@ -61,17 +61,19 @@ it("should play sound when mounting when props.play=true", () => {
   expect(mockOscillator.connect).toHaveBeenCalledTimes(1);
   expect(mockOscillator.frequency.value).toEqual(defaultProps.frequency);
   expect(mockOscillator.start).toHaveBeenCalledTimes(1);
-  expect(mockOscillator.stop).toHaveBeenCalledTimes(1);
-  expect(mockOscillator.stop.mock.calls[0]).toMatchSnapshot();
 
   expect(createGain).toHaveBeenCalledTimes(1);
   expect(mockGain.connect).toHaveBeenCalledTimes(1);
+
+  jest.runAllTimers();
+  expect(mockOscillator.disconnect).toHaveBeenCalledTimes(1);
+  expect(mockOscillator.disconnect.mock.calls[0]).toMatchSnapshot();
 });
 
 it("should play sound when changing from props.play=false to props.play=true", () => {
   const wrapper = mount(<Tone {...defaultProps} />);
 
-  expect(mockOscillator.start).not.toHaveBeenCalled();
+  expect(mockOscillator.connect).not.toHaveBeenCalled();
 
   wrapper.setProps({
     play: true
@@ -81,23 +83,26 @@ it("should play sound when changing from props.play=false to props.play=true", (
   expect(mockOscillator.connect).toHaveBeenCalledTimes(1);
   expect(mockOscillator.frequency.value).toEqual(defaultProps.frequency);
   expect(mockOscillator.start).toHaveBeenCalledTimes(1);
-  expect(mockOscillator.stop).toHaveBeenCalledTimes(1);
-  expect(mockOscillator.stop.mock.calls[0]).toMatchSnapshot();
 
   expect(createGain).toHaveBeenCalledTimes(1);
   expect(mockGain.connect).toHaveBeenCalledTimes(1);
+
+  jest.runAllTimers();
+  expect(mockOscillator.disconnect).toHaveBeenCalledTimes(1);
+  expect(mockOscillator.disconnect.mock.calls[0]).toMatchSnapshot();
 });
 
 it("should not play sound when changing from props.play=true to props.play=false", () => {
   const wrapper = mount(<Tone {...defaultProps} play />);
 
-  mockOscillator.start.mockClear();
+  expect(mockOscillator.connect).toHaveBeenCalledTimes(1);
+  mockOscillator.connect.mockClear();
 
   wrapper.setProps({
     play: false
   });
 
-  expect(mockOscillator.start).not.toHaveBeenCalled();
+  expect(mockOscillator.connect).not.toHaveBeenCalled();
 });
 
 it("should stop playing when unmounting", () => {
@@ -105,7 +110,7 @@ it("should stop playing when unmounting", () => {
 
   wrapper.unmount();
 
-  expect(mockOscillator.disconnect).toHaveBeenCalledTimes(1);
+  expect(mockOscillator.stop).toHaveBeenCalledTimes(1);
 });
 
 it("should update frequency when props.frequency changes", () => {
@@ -130,12 +135,6 @@ it("should update volume when props.volume changes", () => {
   expect(mockGain.gain.value).toEqual(newVolume);
 });
 
-it("should create a default Audio Context", () => {
-  expect(() =>
-    mount(<Tone {...defaultProps} audioContext={undefined} play />)
-  ).not.toThrow();
-});
-
 it("should run callback when Tone has stopped playing", () => {
   const cb = jest.fn();
   mount(<Tone {...defaultProps} play onStop={cb} length={10} />);
@@ -145,4 +144,10 @@ it("should run callback when Tone has stopped playing", () => {
 
   jest.runAllTimers();
   expect(cb).toHaveBeenCalledTimes(1);
+});
+
+it("should create a default Audio Context", () => {
+  expect(() =>
+    mount(<Tone {...defaultProps} audioContext={undefined} play />)
+  ).not.toThrow();
 });

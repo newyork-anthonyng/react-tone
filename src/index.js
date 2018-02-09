@@ -22,15 +22,19 @@ class Tone extends Component {
   }
 
   componentWillUnmount() {
-    this.oscillator.disconnect(this.gainNode);
+    this.oscillator.stop(0);
   }
 
   playSound = () => {
-    const { audioContext, onStop, length } = this.props;
+    const { onStop, length } = this.props;
 
-    this.oscillator.start();
-    this.oscillator.stop(audioContext.currentTime + length);
-    window.setTimeout(onStop, length * 1000);
+    this.oscillator.connect(this.gainNode);
+
+    window.setTimeout(() => {
+      this.oscillator.disconnect(this.gainNode);
+
+      onStop();
+    }, length * 1000);
   };
 
   initializeOscillator = () => {
@@ -42,8 +46,9 @@ class Tone extends Component {
     this.gainNode.gain.value = volume;
     this.oscillator.frequency.value = frequency;
 
-    this.oscillator.connect(this.gainNode);
     this.gainNode.connect(audioContext.destination);
+
+    this.oscillator.start(0);
   };
 
   render() {

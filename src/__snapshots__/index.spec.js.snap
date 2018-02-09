@@ -2,12 +2,34 @@
 
 exports[`should play sound when changing from props.play=false to props.play=true 1`] = `
 Array [
-  123456.42,
+  Object {
+    "connect": [MockFunction] {
+      "calls": Array [
+        Array [
+          "mock-destination",
+        ],
+      ],
+    },
+    "gain": Object {
+      "value": 0.42,
+    },
+  },
 ]
 `;
 
 exports[`should play sound when mounting when props.play=true 1`] = `
 Array [
-  123456.42,
+  Object {
+    "connect": [MockFunction] {
+      "calls": Array [
+        Array [
+          "mock-destination",
+        ],
+      ],
+    },
+    "gain": Object {
+      "value": 0.42,
+    },
+  },
 ]
 `;

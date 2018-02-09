@@ -30,6 +30,7 @@ You can pass `react-tone` an instance of AudioContext. This solves an issue play
 | play  | (**Boolean**) Play a tone | *false* |
 | length | (**Number**) How long the tone should play (in seconds) | *0.05* |
 | frequency | (**Number**) [The frequency of the tone](https://developer.mozilla.org/en-US/docs/Web/API/OscillatorNode/frequency) | *400* |
+| volume | (**Number**) [The volume of the tone](https://developer.mozilla.org/en-US/docs/Web/API/AudioParam#a-rate) (0 being silent, and 1 being the loudest) | *1* |
 | audioContext | (**Object**) [An instance of AudioContext](https://developer.mozilla.org/en-US/docs/Web/API/AudioContext) | *new AudioContext()* |
 | onStop | (**Function**) Callback function to be called when the tone has finished playing | *() => {}* |
 
@@ -81,6 +82,7 @@ class App extends Component {
           audioContext={this.audioContext}
           play={this.state.isTonePlaying}
           frequency={500}
+          volume={0.8}
           length={2}
           onStop={this.handleToneStop}
         />

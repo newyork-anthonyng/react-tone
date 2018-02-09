@@ -5,25 +5,34 @@ import Tone from "./";
 jest.useFakeTimers();
 
 let mockOscillator;
+let mockGain;
 let createOscillator;
+let createGain;
 let mockAudioContext;
 let defaultProps;
 
 beforeEach(() => {
   mockOscillator = {
     connect: jest.fn(),
+    disconnect: jest.fn(),
     frequency: {
       value: undefined
     },
     start: jest.fn(),
     stop: jest.fn()
   };
+  mockGain = {
+    gain: {},
+    connect: jest.fn()
+  };
 
   createOscillator = jest.fn(() => mockOscillator);
+  createGain = jest.fn(() => mockGain);
 
   mockAudioContext = function() {
     return {
       createOscillator,
+      createGain,
       destination: "mock-destination",
       currentTime: 123456
     };
@@ -34,7 +43,8 @@ beforeEach(() => {
     play: false,
     frequency: 42,
     audioContext: new mockAudioContext(),
-    onStop: undefined
+    onStop: undefined,
+    volume: 0.42
   };
 });
 
@@ -53,12 +63,15 @@ it("should play sound when mounting when props.play=true", () => {
   expect(mockOscillator.start).toHaveBeenCalledTimes(1);
   expect(mockOscillator.stop).toHaveBeenCalledTimes(1);
   expect(mockOscillator.stop.mock.calls[0]).toMatchSnapshot();
+
+  expect(createGain).toHaveBeenCalledTimes(1);
+  expect(mockGain.connect).toHaveBeenCalledTimes(1);
 });
 
 it("should play sound when changing from props.play=false to props.play=true", () => {
   const wrapper = mount(<Tone {...defaultProps} />);
 
-  expect(createOscillator).not.toHaveBeenCalled();
+  expect(mockOscillator.start).not.toHaveBeenCalled();
 
   wrapper.setProps({
     play: true
@@ -70,18 +83,51 @@ it("should play sound when changing from props.play=false to props.play=true", (
   expect(mockOscillator.start).toHaveBeenCalledTimes(1);
   expect(mockOscillator.stop).toHaveBeenCalledTimes(1);
   expect(mockOscillator.stop.mock.calls[0]).toMatchSnapshot();
+
+  expect(createGain).toHaveBeenCalledTimes(1);
+  expect(mockGain.connect).toHaveBeenCalledTimes(1);
 });
 
 it("should not play sound when changing from props.play=true to props.play=false", () => {
   const wrapper = mount(<Tone {...defaultProps} play />);
 
-  createOscillator.mockClear();
+  mockOscillator.start.mockClear();
 
   wrapper.setProps({
     play: false
   });
 
-  expect(createOscillator).not.toHaveBeenCalled();
+  expect(mockOscillator.start).not.toHaveBeenCalled();
+});
+
+it("should stop playing when unmounting", () => {
+  const wrapper = mount(<Tone {...defaultProps} />);
+
+  wrapper.unmount();
+
+  expect(mockOscillator.disconnect).toHaveBeenCalledTimes(1);
+});
+
+it("should update frequency when props.frequency changes", () => {
+  const wrapper = mount(<Tone {...defaultProps} />);
+  const newFrequency = 100;
+
+  wrapper.setProps({
+    frequency: newFrequency
+  });
+
+  expect(mockOscillator.frequency.value).toEqual(newFrequency);
+});
+
+it("should update volume when props.volume changes", () => {
+  const wrapper = mount(<Tone {...defaultProps} />);
+  const newVolume = 0.8;
+
+  wrapper.setProps({
+    volume: newVolume
+  });
+
+  expect(mockGain.gain.value).toEqual(newVolume);
 });
 
 it("should create a default Audio Context", () => {

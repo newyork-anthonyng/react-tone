@@ -9,6 +9,10 @@ global.AudioContext = function AudioContext() {
       frequency: {},
       start: () => {},
       stop: () => {}
+    }),
+    createGain: () => ({
+      gain: {},
+      connect: () => {}
     })
   };
 };
